@@ -1,6 +1,16 @@
-<%= form_with url: session_create_url, method: :post, local: true do |f| %>
-    <%= f.text_field :login, required: true, label: 'Логин' %>
-    <%= f.password_field :password, required: true, label: 'Пароль' %>
-    <%= f.submit 'Войти' %>
+<div class="container w-25">
+<%= form_with url: session_create_url, method: :post, local: true do |form| %>
+  <div class="field mb-3">
+    <%= form.label :login, 'Логин' %>
+    <%= form.text_field :login, required: true, label: 'Логин', class: 'form-control' %>
+  </div>
+  <div class="field mb-3">
+    <%= form.label :password, 'Пароль' %>
+    <%= form.password_field :password, required: true, label: 'Пароль', class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= form.submit 'Войти', class: 'btn btn-primary' %>
+  </div>
 <% end %>
+</div>
 <%= link_to 'Зарегистрироваться', new_user_path %>
