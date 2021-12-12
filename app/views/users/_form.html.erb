@@ -15,38 +15,51 @@
       <% flash.now[:danger] = "#{col_name} #{error.message}" %>
     <% end %>
   <% end %>
+  <div class="w-50 m-3 table-responsive">
+    <table class="table table-borderless">
+      <tr>
+        <th scope="row" class="col-4 text-center"><%= form.label :username, 'Имя пользователя' %></th>
+        <td scope="row" class="col-8 text-center"><%= form.text_field :username, style: 'min-width: 100%' %></td>
+      </tr>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+      <tr>
+        <th scope="row" class="col-4 text-center"><%= form.label :email %></th>
+        <td scope="row" class="col-8 text-center"><%= form.text_field :email, style: 'min-width: 100%' %></td>
+      </tr>
+
+      <% if current_user&.admin? %>
+        <tr>
+          <th scope="row" class="col-4 text-center"><%= form.label 'Статус' %></th>
+          <td scope="row" class="col-8 text-center">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <%= form.radio_button :admin, 'true', class: "btn-check"%>
+              <%= form.label 'Администратор', class: "btn btn-outline-primary", for: :user_admin_true%>
+              <%= form.radio_button :admin, 'false', class: "btn-check"%>
+              <%= form.label 'Пользователь', class: "btn btn-outline-primary", for: :user_admin_false %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+
+      <% if current_user.nil? || current_user == user %>
+        <tr>
+          <th scope="row" class="col-4 text-center"><%= form.label :password, 'Пароль' %></th>
+          <td scope="row" class="col-8 text-center"><%= form.password_field :password, style: 'min-width: 100%' %></td>
+        </tr>
+
+        <tr>
+          <th scope="row" class="col-4 text-center"><%= form.label :password_confirmation, 'Подтверждение пароля' %></th>
+          <td scope="row" class="col-8 text-center"><%= form.password_field :password_confirmation, style: 'min-width: 100%' %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td scope="row" colspan="2" align="right">
+          <button type="submit" class="btn btn-primary">
+            Сохранить
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <% if current_user&.admin? %>
-    <%= form.label 'Статус' %>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <%= form.radio_button :admin, 'true', class: "btn-check"%>
-      <%= form.label 'Администратор', class: "btn btn-outline-primary", for: :user_admin_true%>
-      <%= form.radio_button :admin, 'false', class: "btn-check"%>
-      <%= form.label 'Пользователь', class: "btn btn-outline-primary", for: :user_admin_false %>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Сохранить' %>
-  </div>
 <% end %>

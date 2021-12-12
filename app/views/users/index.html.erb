@@ -1,23 +1,27 @@
 <h1>Пользователи</h1>
 
-<table>
-  <thead>
-    <thead class="text-center">
-      <th>Имя пользователя</th>
-      <th>Email</th>
-      <th colspan="3"></th>
+<div class="w-75 m-3 table-responsive">
+  <table class="table table-sm table-borderless">
+    <thead>
+      <thead class="text-center">
+        <th>Имя пользователя</th>
+        <th>Email</th>
+        <th>Администратор</th>
+        <th colspan="3"></th>
+      </thead>
     </thead>
-  </thead>
 
-  <tbody class="text-start">
-    <% @users.each do |user| %>
-      <tr>
-        <td class="col-4"><%= user.username %></td>
-        <td class="col-4"><%= user.email %></td>
-        <td class="col-1"><%= link_to 'Show', user %></td>
-        <td class="col-1"><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td class="col-1"><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody class="text-start">
+      <% @users.each do |user| %>
+        <tr>
+          <td class="col-3"><%= user.username %></td>
+          <td class="col-3"><%= user.email %></td>
+          <td class="col-2 text-center"><%= user.admin? ? 'Да' : 'Нет' %></td>
+          <td class="col-1"><%= link_to 'Профиль', user %></td>
+          <td class="col-1"><%= link_to 'Изменить', edit_user_path(user) %></td>
+          <td class="col-1"><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
