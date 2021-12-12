@@ -4,13 +4,15 @@
   <% end %>
 
   <% if user.errors.any? %>
-    <% user.errors.each do |key, error| %>
-      <% col_name = case key %>
+    <% user.errors.each do |error| %>
+      <% col_name = case error.attribute %>
                     <% when :username then 'Имя пользователя' %>
+                    <% when :password then 'Пароль' %>
+                    <% when :email then 'Электронная почта' %>
                     <% else %>
-                    <% key %>
+                    <% '' %>
                     <% end %>
-      <% flash.now[:danger] = "#{col_name} #{error}" %>
+      <% flash.now[:danger] = "#{col_name} #{error.message}" %>
     <% end %>
   <% end %>
 
