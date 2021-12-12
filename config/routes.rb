@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'sequence#input'
+  root 'session#login'
   get 'sequence/input'
   get 'sequence/view'
   get 'session/login'

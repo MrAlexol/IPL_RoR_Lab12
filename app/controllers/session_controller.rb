@@ -1,7 +1,9 @@
 class SessionController < ApplicationController
   skip_before_action :require_login, only: %i[login create]
 
-  def login; end
+  def login
+    redirect_to sequence_input_path if signed_in?
+  end
 
   def create
     user = User.find_by(username: params[:login])
