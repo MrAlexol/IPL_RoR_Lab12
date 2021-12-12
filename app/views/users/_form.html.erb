@@ -1,4 +1,8 @@
 <%= form_with model: user do |form| %>
+  <% unless current_user.nil? || current_user == user %>
+    <p class="text-danger">Вы редактируете учетную запись другого пользователя!</p>
+  <% end %>
+
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -21,6 +25,16 @@
     <%= form.text_field :email %>
   </div>
 
+  <% if current_user&.admin? %>
+    <%= form.label 'Статус' %>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <%= form.radio_button :admin, 'true', class: "btn-check"%>
+      <%= form.label 'Администратор', class: "btn btn-outline-primary", for: :user_admin_true%>
+      <%= form.radio_button :admin, 'false', class: "btn-check"%>
+      <%= form.label 'Пользователь', class: "btn btn-outline-primary", for: :user_admin_false %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password %>
@@ -32,6 +46,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Сохранить' %>
   </div>
 <% end %>

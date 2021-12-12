@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
+  <strong>Имя пользователя:</strong>
   <%= @user.username %>
 </p>
 
@@ -10,5 +10,10 @@
   <%= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+  <strong>Статус:</strong>
+  <%= @user.admin? ? 'Администратор' : 'Пользователь' %>
+</p>
+
+<%= link_to 'Редактировать', edit_user_path(@user) %> |
+<%= link_to 'На главную', root_path %>
