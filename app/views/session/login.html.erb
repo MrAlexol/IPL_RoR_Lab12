@@ -1,4 +1,3 @@
-<div class="container w-25">
 <%= form_with url: session_create_url, method: :post, local: true do |form| %>
   <div class="field mb-3">
     <%= form.label :login, 'Логин' %>
@@ -12,5 +11,4 @@
     <%= form.submit 'Войти', class: 'btn btn-primary' %>
   </div>
 <% end %>
-</div>
 <%= link_to 'Зарегистрироваться', new_user_path %>

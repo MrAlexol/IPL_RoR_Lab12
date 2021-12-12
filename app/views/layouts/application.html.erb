@@ -13,6 +13,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar', user: current_user %>
+    <main class="container">
+      <%= yield %>
+    </main>
   </body>
 </html>
