@@ -1,8 +1,9 @@
-<h1 class="m-3">Результат поиска</h1>
-
 <% if @error %>
-    <p class="text-danger m-3"><%= @error %></p>
+    <% flash.now[:danger] = @error %>
+    <p class="m-3">Результатов поиска нет<p>
 <% else %>
+
+<h1 class="m-3">Результат поиска</h1>
 
 <div class="m-3">Вы ввели: <%= @input %></div>
 <div class="w-25 m-3 table-responsive">

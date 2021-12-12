@@ -33,7 +33,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         sign_in @user
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.html do
+          flash[:success] = 'Пользователь успешно создан'
+          redirect_to @user
+        end
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +50,10 @@ class UsersController < ApplicationController
     if current_user.id == @user.id || current_user.admin?
       respond_to do |format|
         if @user.update(user_params)
-          format.html { redirect_to @user, notice: "User was successfully updated." }
+          format.html do
+            flash[:success] = 'Параметры пользователя успешно обновлены'
+            redirect_to @user
+          end
           format.json { render :show, status: :ok, location: @user }
         else
           format.html { render :edit, status: :unprocessable_entity }
